@@ -1,6 +1,3 @@
-const toggleButton = document.getElementById('toggle-button');
-const navbarLinks = document.getElementById('navbar-links');
-
-toggleButton.onclick = () => {
-    navbarLinks.classList.toggle('active');
+document.getElementById('toggle-button').onclick = () => {
+    document.querySelector('nav').classList.toggle('expanded');
 }
