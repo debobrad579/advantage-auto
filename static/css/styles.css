@@ -1,9 +1,16 @@
 /* Variables */
 :root {
     --dark-gray: hsl(0, 0%, 20%);
+    --side-padding: 8%;
 }
 
-/* Global Styles */
+@media (max-width: 600px) {
+    :root {
+        --side-padding: 10px;
+    }
+}
+
+/* General Styles */
 * {
     box-sizing: border-box;
 }
@@ -14,13 +21,24 @@ body {
     font-family: sans-serif;
 }
 
+#content {
+    padding: 0 var(--side-padding);
+}
+
 /* Navbar */
 nav {
+    position: relative;
+    z-index: 10;
+}
+
+#navbar {
     display: flex;
+    position: relative;
     background-color: var(--dark-gray);
     color: white;
     justify-content: space-between;
     align-items: center;
+    z-index: initial;
 }
 
 #brand-title {
@@ -32,6 +50,10 @@ nav {
     margin: 0;
     padding: 0;
     display: flex;
+}
+
+#navbar-links, #navbar-elements {
+    padding: 0 var(--side-padding);
 }
 
 #navbar-links li {
@@ -53,7 +75,6 @@ nav {
 #navbar-links li a.active {
     color: white;
 }
-
 
 #toggle-button {
     position: absolute;
@@ -78,7 +99,7 @@ nav {
     background-color: hsl(0, 0%, 75%);
 }
 
-nav.expanded #toggle-button span {
+#navbar.expanded #toggle-button span {
     background-color: white;
 }
 
@@ -88,13 +109,13 @@ nav.expanded #toggle-button span {
     }
 
     #navbar-links {
-        display: none;
+        position: absolute;
         width: 100%;
-    }
-
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
+        top: 100%;
+        z-index: -1;
+        background-color: var(--dark-gray);
+        transform: translateY(-110px);
+        transition: transform .25s ease-in-out;
     }
 
     #navbar-links ul {
@@ -110,8 +131,8 @@ nav.expanded #toggle-button span {
         padding: .5rem 1rem;
     }
 
-    nav.expanded #navbar-links {
-        display: flex;
+    #navbar.expanded #navbar-links {
+        transform: translateY(0px);
     }
 }
 

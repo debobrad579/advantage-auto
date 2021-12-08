@@ -10,20 +10,28 @@
     </head>
     <body>
         <nav>
-            <div id="brand-title">Advantage Auto</div>
-            <div id="toggle-button">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div id="navbar-links">
-                <ul>
-                    <li><a href="#" {% if active == 'home' %}class="active"{% endif %}>Home</a></li>
-                    <li><a href="#" {% if active == 'about' %}class="active"{% endif %}>About</a></li>
-                    <li><a href="#" {% if active == 'contact' %}class="active"{% endif %}>Contact</a></li>
-                </ul>
+            <div id="navbar">
+                <div id="navbar-elements">
+                    <div id="brand-title">Advantage Auto</div>
+                    <div id="toggle-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div id="navbar-links">
+                    <ul>
+                        <li><a href="#" {% if active == 'home' %}class="active"{% endif %}>Home</a></li>
+                        <li><a href="#" {% if active == 'about' %}class="active"{% endif %}>About</a></li>
+                        <li><a href="#" {% if active == 'contact' %}class="active"{% endif %}>Contact</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
+        <div id="content">
+            {% block body %}
+            {% endblock %}
+        </div>
         <footer>
             <p>&copy; Advantage Auto</p>
             <p>All rights reserved.</p>
