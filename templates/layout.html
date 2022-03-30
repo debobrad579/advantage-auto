@@ -10,32 +10,61 @@
         <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
     </head>
     <body>
-        <nav>
-            <div id="navbar">
-                <div id="navbar-elements">
-                    <div id="brand-title">Advantage Auto</div>
-                    <div id="toggle-button">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+        <table id="container">
+            <tr>
+                <td valign="top">
+                    <nav>
+                        <div id="navbar">
+                            <div id="navbar-elements">
+                                <div id="brand-title">
+                                    <a href="{{ url_for('home') }}">
+                                        <img src="{{ url_for('static', filename='img/logo.png') }}" width="200px" alt="Advantage Auto">
+                                    </a>
+                                </div>
+                                <div id="toggle-button">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div id="navbar-links">
+                                <ul>
+                                    <li>
+                                        <a href="{{ url_for('who_we_are') }}" {% if active == 'who_we_are' %}class="active"{% endif %}>Who we are</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('staff') }}" {% if active == 'staff' %}class="active"{% endif %}>Staff</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('services') }}" {% if active == 'services' %}class="active"{% endif %}>Services Offered</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('used_car') }}" {% if active == 'used_car' %}class="active"{% endif %}>Buying a used car?</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('avoid') }}" {% if active == 'avoid' %}class="active"{% endif %}>Vehicles to avoid</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('appointment') }}" {% if active == 'appointment' %}class="active"{% endif %}>Online appointment request</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div id="content">
+                        {% block body %}
+                        {% endblock %}
                     </div>
-                </div>
-                <div id="navbar-links">
-                    <ul>
-                        <li><a href="#" {% if active == 'home' %}class="active"{% endif %}>Home</a></li>
-                        <li><a href="#" {% if active == 'about' %}class="active"{% endif %}>About</a></li>
-                        <li><a href="#" {% if active == 'contact' %}class="active"{% endif %}>Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div id="content">
-            {% block body %}
-            {% endblock %}
-        </div>
-        <footer>
-            <p>&copy; Advantage Auto</p>
-            <p>All rights reserved.</p>
-        </footer>
+                </td>
+            </tr>
+            <tr>
+                <td valign="bottom">
+                    <footer>
+                        <h3>&copy; Advantage Auto</h3>
+                        <h3>All rights reserved.</h3>
+                    </footer>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
