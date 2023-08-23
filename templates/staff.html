@@ -2,5 +2,46 @@
 
 {% block body %}
     <h1>Staff:</h1>
-    TODO
+    <div class="outside-grid-container">
+        <div class="grid-container">
+            <div>
+                <img class="photo" src="{{ url_for('static', filename='img/owen.jpg') }}" alt="Owen DeBoer" id="owen">
+            </div>
+            <p>
+                Owen DeBoer started in the trade in 1991. He has been a certified Red Seal 310S Auto Service Technician as well as a 310T Truck and Coach since May 1996.
+            </p>
+        </div>
+        <div class="grid-container">
+            <div>
+                <img class="photo" src="{{ url_for('static', filename='img/1.jpg') }}" alt="Stuart Gillanders" id="owen">
+            </div>
+            <p>Gillanders
+                Stuart Gillanders started in the trade in 1997 and started working here in August 2005. He has been a certified Red Seal 310S Auto Service Technician since October 2004.
+            </p>
+        </div>
+        <div class="grid-container">
+            <div>
+                <img class="photo" src="{{ url_for('static', filename='img/2.jpg') }}" alt="Ryan Boulton" id="owen">
+            </div>
+            <p>
+                Ryan Boulton started in the trade in 1999 and started working here in March 2015. He has been a certified Red Seal 310S Auto Service Technician since September 2004.
+            </p>       
+        </div>
+        <div class="grid-container">
+            <div>
+                <img class="photo" src="{{ url_for('static', filename='img/4.jpg') }}" alt="William Dyer" id="owen">
+            </div>
+            <p>
+                William Dyer started as a co-op student with us in 2012. He has been a certified Red Seal 310S Auto Service Technician since May 2018.
+            </p>       
+        </div>
+        <div class="grid-container">
+            <div>
+                <img class="photo" src="{{ url_for('static', filename='img/3.jpg') }}" alt="Cody Summers" id="owen">
+            </div>
+            <p>
+                Cody Summers started as a co-op student with us in 2018. He is currently working through his apprenticeship program here.
+            </p>       
+        </div>
+    </div>
 {% endblock %}

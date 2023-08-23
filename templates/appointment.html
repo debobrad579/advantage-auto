@@ -2,5 +2,42 @@
 
 {% block body %}
     <h1>Online appointment request</h1>
-    TODO
+    <form method="post">
+        <h3>Client Information</h3>
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone" required>
+        <label for="email">Email:</label>
+        <input type="text" name="email" required>
+
+        <h3>Vehicle Information</h3>
+        <label for="year">Year:</label>
+        <select name="year" id="year-select" required>
+            <option value="0" selected disabled hidden>Select a Year</option>
+        </select>
+        <label for="make">Make:</label>
+        <select name="make" id="make-select" required>
+            <option value="0" selected disabled hidden>Select a Make</option>
+        </select>
+        <label for="model">Model:</label>
+        <input type="text" name="model" required>
+
+        <h3>Requested Service Information</h3>
+        <label for="service">Requested Service:</label>
+        <select name="service" required>
+            <option value="0" selected disabled hidden>Select a Service</option>
+            <option value="Test-Service">Test Service</option>
+        </select>
+        <label for="date">Requested Date:</label>
+        <input type="date" name="date" id="date-input" required>
+        <label for="time">Requested Time:</label>
+        <select name="time" id="time-select">
+            <option value="0" selected disabled hidden>Select a Time</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
 {% endblock %}
