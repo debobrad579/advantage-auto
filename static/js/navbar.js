@@ -26,11 +26,3 @@ window.addEventListener('resize', () => {
     navbar.classList.toggle('active');
   }
 });
-
-const result = document.querySelector('.result')
-const form = document.querySelector('form')
-form.addEventListener('submit', function(e) {
-  const formData = new FormData(form)
-  result.innerText = JSON.stringify(formData.getAll('select'), null, 2)
-  e.preventDefault();
-})
