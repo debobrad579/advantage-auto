@@ -49,7 +49,7 @@ def appointment():
     if request.method == "POST":
         try:
             email_sender = "bradydeboer195@gmail.com"
-            password = "zyuxiloqrkwuhwqv"
+            password = "lgfckgcjasifjian"
             email_receiver = "thebradster7.bd@gmail.com"
             subject = "Appointment Request"
             body = f"""
@@ -59,17 +59,17 @@ Phone: {request.form.get('phone')}
 Email: {request.form.get('email')}
 
 Vehicle Information:
-Make: {request.form.get('make').replace("+", " ")}
-Model: {request.form.get('model')}
 Year: {request.form.get('year')}
+Make: {request.form.get('make').replace('+', ' ')}
+Model: {request.form.get('model')}
 
 Requested Service Information:
-Requested Service: {request.form.get('service').replace("+", " ")}
+Requested Services: {format_services(request.form.get('service'), request.form.get('service2'), request.form.get('service3'))}
 Requested Date: {format_date(request.form.get('date'))}
 Requested Time: {format_time(request.form.get('time'))}
 
-Additional Comments:
-{request.form.get('comment')}
+Additional Information:
+{request.form.get('additional')}
             """
             em = EmailMessage()
             em["From"] = email_sender
@@ -78,7 +78,7 @@ Additional Comments:
             em.set_content(body)
             context = ssl.create_default_context()
 
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
                 smtp.login(email_sender, password)
                 smtp.sendmail(email_sender, email_receiver, em.as_string())
             
@@ -88,29 +88,24 @@ Additional Comments:
 
     return render_template("appointment.html", active="appointment", success=success)
 
+def format_services(*services):
+    return ", ".join([i.replace("+", " ") for i in services if i is not None])
+
 def format_date(date):
     try:
-        date_object = datetime.strptime(date, '%Y-%m-%d')
+        date_object = datetime.strptime(date, "%Y-%m-%d")
         month_names = [
-            'January', 'February', 'March', 'April', 'May', 'June', 
-            'July', 'August', 'September', 'October', 'November', 'December'
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
         ]
-        day = date_object.day
-        month = month_names[date_object.month - 1]
-        year = date_object.year
-
-        formatted_date = f'{month} {day}, {year}'
-        return formatted_date
+        return f"{month_names[date_object.month - 1]} {date_object.day}, {date_object.year}"
     except ValueError:
         return date
 
 def format_time(time):
     try:
-        hour, minute = map(int, time.split(':'))
-        am_pm = 'AM' if hour < 12 else 'PM'
-        formatted_hour = hour % 12 if hour % 12 != 0 else 12
-        formatted_time = f'{formatted_hour}:{minute:02d} {am_pm}'
-        return formatted_time
+        hour, minute = map(int, time.split(":"))
+        return f"{hour % 12 if hour % 12 != 0 else 12}:{minute:02d} {'AM' if hour < 12 else 'PM'}"
     except ValueError:
         return time
 

@@ -7,82 +7,111 @@
 {% block body %}
     <h1>Appointment Request</h1>
     <form method="post">
-        <div id="form-grid">
+        <div class="grid-container">
             <div>
                 <h3>Client Information</h3>
                 <table>
-                    <tr>
-                        <td><label for="name">Name:</label></td>
-                        <td><input type="text" name="name" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="phone">Phone:</label></td>
-                        <td><input type="tel" name="phone" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="email">Email:</label></td>
-                        <td><input type="email" name="email" required></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td><label for="name">Name:</label></td>
+                            <td><input type="text" name="name" id="name" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="phone">Phone:</label></td>
+                            <td><input type="tel" name="phone" id="phone" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">Email:</label></td>
+                            <td><input type="email" name="email" id="email" required></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div>
                 <h3>Vehicle Information</h3>
                 <table>
-                    <tr>
-                        <td><label for="make">Make:</label></td>
-                        <td>
-                            <select name="make" id="make-select" required>
-                                <option value="0" selected disabled hidden>Select a Make</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="model">Model:</label></td>
-                        <td><input type="text" name="model" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="year">Year:</label></td>
-                        <td><input type="number" name="year" id="year-input"></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td><label for="year">Year:</label></td>
+                            <td><input type="number" name="year" id="year" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="make">Make:</label></td>
+                            <td>
+                                <select name="make" class="make" id="make" required>
+                                    <option value="0" selected disabled hidden>Select a Make</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="model">Model:</label></td>
+                            <td><input type="text" name="model" id="model" required></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div>
                 <h3>Requested Service Information</h3>
                 <table>
-                    <tr>
-                        <td><label for="service">Requested Service:</label></td>
-                        <td>
-                            <select name="service" id="service-select" required>
-                                <option value="0" selected disabled hidden>Select a Service</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="date">Requested Date:</label></td>
-                        <td><input type="date" name="date" id="date-input" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="time">Requested Time:</label></td>
-                        <td><input type="time" name="time" id="time-input"></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td><label for="service">Requested Services:</label></td>
+                            <td>
+                                <select name="service" class="service" id="service">
+                                    <option value="0" selected disabled hidden>Select a Service</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <select name="service2" class="service">
+                                    <option value="0" selected disabled hidden>Select a Service</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <select name="service3" class="service">
+                                    <option value="0" selected disabled hidden>Select a Service</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="date">Requested Date:</label></td>
+                            <td><input type="date" name="date" id="date" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="time">Requested Time:</label></td>
+                            <td><input type="time" name="time" id="time"></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
-        </div>
-        <div>
-            <h3>Additional Comments</h3>
-            <textarea name="comment"></textarea>
+            <div>
+                <h3>Additional Information</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><textarea name="additional"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
         </div>
         <br>
-        <div>
+        <div style="text-align: center;">
             <input type="submit" value="Submit">
             <input type="reset" value="Reset">
         </div>
     </form>
-    {% if success != None %}
+    <dialog {% if success != None %}class="active"{% endif %}>
         {% if success %}
-            <h2>Form Submitted Successfully</h2>
+            <h1>Request Submitted Successfully</h1>
         {% else %}
-            <h2>Form Submission Failed</h2>
+            <h1>Request Submission Failed</h1>
         {% endif %}
-    {% endif %}
+        <button>Close</button>
+    </dialog>
 {% endblock %}
