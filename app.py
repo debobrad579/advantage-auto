@@ -42,42 +42,51 @@ def avoid():
     return render_template("avoid.html", active="avoid")
 
 
-@app.route("/online-appointment-request", methods=["GET", "POST"])
+@app.route("/appointment-request", methods=["GET", "POST"])
 def appointment():
+    success = None
+
     if request.method == "POST":
-        email_sender = "thebradster7.bd@gmail.com"
-        password = ""
-        email_receiver = "bradydeboer195@gmail.com"
-        subject = "Appointment Request"
-        body = f"""
+        try:
+            email_sender = "bradydeboer195@gmail.com"
+            password = "zyuxiloqrkwuhwqv"
+            email_receiver = "thebradster7.bd@gmail.com"
+            subject = "Appointment Request"
+            body = f"""
 Client Information:
 Name: {request.form.get('name')}
 Phone: {request.form.get('phone')}
 Email: {request.form.get('email')}
 
 Vehicle Information:
-Year: {request.form.get('year')}
-Make: {request.form.get('make')}
+Make: {request.form.get('make').replace("+", " ")}
 Model: {request.form.get('model')}
+Year: {request.form.get('year')}
 
 Requested Service Information:
-Service: {request.form.get('service')}
-Date: {format_date(request.form.get('date'))}
-Time: {format_time(request.form.get('time'))}
-        """
-        em = EmailMessage()
-        em["From"] = email_sender
-        em["To"] = email_receiver
-        em["Subject"] = subject
-        em.set_content(body)
+Requested Service: {request.form.get('service').replace("+", " ")}
+Requested Date: {format_date(request.form.get('date'))}
+Requested Time: {format_time(request.form.get('time'))}
 
-        context = ssl.create_default_context()
+Additional Comments:
+{request.form.get('comment')}
+            """
+            em = EmailMessage()
+            em["From"] = email_sender
+            em["To"] = email_receiver
+            em["Subject"] = subject
+            em.set_content(body)
+            context = ssl.create_default_context()
 
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-            smtp.login(email_sender, password)
-            smtp.sendmail(email_sender, email_receiver, em.as_string())
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+                smtp.login(email_sender, password)
+                smtp.sendmail(email_sender, email_receiver, em.as_string())
+            
+            success = True
+        except:
+            success = False
 
-    return render_template("appointment.html", active="appointment")
+    return render_template("appointment.html", active="appointment", success=success)
 
 def format_date(date):
     try:

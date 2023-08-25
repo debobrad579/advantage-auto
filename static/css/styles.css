@@ -118,7 +118,7 @@ nav > div {
     background-color: white;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1130px) {
     :root {
         --side-padding: 20px;
     }
@@ -177,7 +177,7 @@ footer > div {
 }
 
 /* Grids */
-.grid-container, .outside-grid-container {
+.grid-container, .grid-container-3, .outside-grid-container {
     display: grid;
     grid-column-gap: 20px;
     grid-template-columns: 50% 50%;
@@ -189,8 +189,44 @@ footer > div {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1130px) {
     .outside-grid-container {
         grid-template-columns: 100%;
+    }
+}
+
+/* Form */
+input, select, .custom-select {
+    width: 20vw;
+    height: 25px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+input[type="submit"], input[type="reset"] {
+    width: 200px
+}
+
+textarea {
+    width: 400px;
+    display: block;
+    overflow: hidden;
+    resize: none;
+}
+
+#form-grid {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: auto auto auto;
+}
+
+@media (max-width: 970px) {
+    #form-grid {
+        grid-template-columns: 100%;
+    }
+
+    input, select {
+        width: 200px;
     }
 }

@@ -7,7 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}"/>
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
-        <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/navbar.js') }}" defer></script>
+        {% block head %}
+        {% endblock %}
     </head>
     <body>
         <nav>
@@ -19,12 +21,12 @@
                     <span></span>
                 </div>
                 <ul id="navbar-links">
-                    <li><a {% if active == 'who_we_are' %}class="active"{% endif %} href="{{ url_for('who_we_are') }}">Who we are</a></li>
+                    <li><a {% if active == 'who_we_are' %}class="active"{% endif %} href="{{ url_for('who_we_are') }}">Who We Are</a></li>
                     <li><a {% if active == 'staff' %}class="active"{% endif %} href="{{ url_for('staff') }}">Staff</a></li>
                     <li><a {% if active == 'services' %}class="active"{% endif %} href="{{ url_for('services') }}">Services Offered</a></li>
-                    <li><a {% if active == 'used_car' %}class="active"{% endif %} href="{{ url_for('used_car') }}">Buying a used car?</a></li>
-                    <li><a {% if active == 'avoid' %}class="active"{% endif %} href="{{ url_for('avoid') }}">Vehicles to avoid</a></li>
-                    <li><a {% if active == 'appointment' %}class="active"{% endif %} href="{{ url_for('appointment') }}">Online appointment request</a></li>
+                    <li><a {% if active == 'used_car' %}class="active"{% endif %} href="{{ url_for('used_car') }}">Buying a Used Car?</a></li>
+                    <li><a {% if active == 'avoid' %}class="active"{% endif %} href="{{ url_for('avoid') }}">Vehicles to Avoid</a></li>
+                    <li><a {% if active == 'appointment' %}class="active"{% endif %} href="{{ url_for('appointment') }}">Appointment Request</a></li>
                 </ul>
             </div>
         </nav>
