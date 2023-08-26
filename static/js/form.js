@@ -1,8 +1,5 @@
-const dateInput = document.getElementById('date');
-const timeInput = document.getElementById('time');
-const today = new Date();
-
 function initializeYearInput() {
+  const today = new Date();
   const yearInput = document.getElementById('year');
   const currentYear = today.getFullYear();
   const minYear = 1900;
@@ -18,28 +15,6 @@ function initializeYearInput() {
     if (!/^\d/.test(event.key)) {
       event.preventDefault();
     }
-  });
-}
-
-function initializeDateInput() {
-	dateInput.min = today.toISOString().slice(0, 10);
-
-  let recentlySelectedDate = '';
-
-  dateInput.addEventListener('change', function(event) {
-    if ([0, 6].includes(new Date(this.value).getUTCDay())){
-      event.preventDefault();
-      this.value = recentlySelectedDate;
-    } else {
-      recentlySelectedDate = this.value;
-      timeInput.value = timeInput.value === '' ? '' : roundTime(timeInput.value);
-    }
-  });
-}
-
-function initializeTimeInput() {
-  document.getElementById('time').addEventListener('change', function() {
-    this.value = roundTime(this.value);
   });
 }
 
@@ -103,6 +78,4 @@ const services = [
 initializeSelect('make', makes);
 initializeYearInput();
 initializeSelect('service', services);
-initializeDateInput();
-initializeTimeInput();
 initializeModal();

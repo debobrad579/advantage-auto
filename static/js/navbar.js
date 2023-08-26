@@ -3,26 +3,34 @@ const navbarLinks = document.getElementById('navbar-links');
 const navbar = document.querySelector('nav');
 
 navbarToggle.addEventListener('click', () => {
-  navbarLinks.style.transition = 'translate 0.523s ease-in-out';
-  navbar.style.transition = 'height 0.5s ease-in-out';
-  navbarLinks.classList.toggle('active');
-  navbarToggle.classList.toggle('active');
+  if (navbar.classList.contains('up')) {
+    navbarLinks.style.display = 'block';
+  }
 
-  setTimeout(() => {
-    navbar.classList.toggle('active');
-  }, navbar.classList.contains('active') ? 0 : 23);
+  navbarToggle.classList.toggle('active');
+  navbarLinks.classList.toggle('down');
+  navbar.classList.toggle('down');
   
-  setTimeout(() => {
-    navbarLinks.style.transition = '';
-    navbar.style.transition = '';
-  }, 523);
+  if (navbarLinks.classList.contains('initial')) {
+    navbarLinks.classList.toggle('initial');
+    return;
+  }
+
+  navbarLinks.classList.toggle('up');
+  navbar.classList.toggle('up');
+
+  if (navbar.classList.contains('up')) {
+    setTimeout(() => {
+      navbarLinks.style.display = 'none';
+    }, 500);
+  }
 });
 
 window.addEventListener('resize', () => {
-  if (document.documentElement.clientWidth > 1165 
-      && navbarLinks.classList.contains('active')) {
-    navbarLinks.classList.toggle('active');
-    navbarToggle.classList.toggle('active');
-    navbar.classList.toggle('active');
+  if (document.documentElement.clientWidth >= 1200) {
+    navbarLinks.removeAttribute('class');
+    navbarLinks.classList.toggle('initial');
+    navbar.removeAttribute('class');
+    navbarToggle.removeAttribute('class');
   }
 });
