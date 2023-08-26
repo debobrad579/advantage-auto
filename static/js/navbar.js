@@ -4,7 +4,7 @@ const navbar = document.querySelector('nav');
 
 navbarToggle.addEventListener('click', () => {
   if (navbar.classList.contains('up')) {
-    navbarLinks.style.display = 'block';
+    navbarLinks.style.display = 'flex';
   }
 
   navbarToggle.classList.toggle('active');
@@ -32,5 +32,6 @@ window.addEventListener('resize', () => {
     navbarLinks.classList.toggle('initial');
     navbar.removeAttribute('class');
     navbarToggle.removeAttribute('class');
+    navbarLinks.style.display = 'flex';
   }
 });

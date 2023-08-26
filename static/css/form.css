@@ -1,0 +1,45 @@
+input, select, textarea {
+    width: 100%;
+    height: 25px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+input[type="submit"], input[type="reset"] {
+    width: 375px;
+}
+
+textarea {
+    height: 141px;
+    resize: none;
+}
+
+table {
+    width: 100%;
+}
+
+td:first-child {
+    width: 175px;
+}
+
+#form-buttons {
+    text-align: center;
+}
+
+dialog {
+    border: 3px solid var(--dark-grey);
+    border-radius: 10px;
+}
+
+@media (max-width: 830px) {
+    input[type="submit"], input[type="reset"] {
+        width: 100%;
+    }
+
+    #form-buttons {
+        display: grid;
+        grid-column-gap: 5px;
+        grid-template-columns: auto auto;
+    }
+}
