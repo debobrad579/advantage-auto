@@ -244,8 +244,7 @@ input, select, textarea {
 }
 
 input[type="submit"], input[type="reset"] {
-    width: 200px;
-    margin-bottom: 5px;
+    width: 375px;
 }
 
 textarea {
@@ -261,7 +260,23 @@ td:first-child {
     width: 175px;
 }
 
+#form-buttons {
+    text-align: center;
+}
+
 dialog {
     border: 3px solid var(--dark-grey);
     border-radius: 10px;
+}
+
+@media (max-width: 830px) {
+    input[type="submit"], input[type="reset"] {
+        width: 100%;
+    }
+
+    #form-buttons {
+        display: grid;
+        grid-column-gap: 5px;
+        grid-template-columns: auto auto;
+    }
 }
