@@ -18,19 +18,6 @@ function initializeYearInput() {
   });
 }
 
-function roundTime(time) {
-	let hour = parseInt(time.slice(0, 2));
-	let minute = parseInt(time.slice(3, 5));
-
-  return (
-    hour < 8 ? '08:00' :
-    new Date(dateInput.value).getUTCDay() === 5 && hour + minute / 60 >= 13.5 ? '13:30' :
-    hour >= 17 ? '17:00' :
-    minute > 45 ? `${(hour + 1).toString().length === 1 ? '0' + (hour + 1) : hour + 1}:00` :
-    minute < 15 ? `${time.slice(0, 2)}:00` : `${time.slice(0, 2)}:30`
-  );
-}
-
 function initializeSelect(className, list) {
   Array.prototype.forEach.call(document.getElementsByClassName(className), select => {
     for (let i = 0; i < list.length; i++) {
@@ -61,6 +48,57 @@ function initializeModal() {
   }
 }
 
+function checkFormValidation() {
+  const makeSelect = document.getElementById('make');
+  const serviceSelects = document.getElementsByClassName('service');
+  const dateInput = document.getElementById('date');
+  const timeInput = document.getElementById('time');
+  const submitInput = document.querySelector('input[type="submit"]');
+
+  submitInput.addEventListener('click', () => {
+    if (makeSelect.value === '0') {
+      makeSelect.setCustomValidity('Please select a make.');
+    } else {
+      makeSelect.setCustomValidity('');
+    }
+
+    if (serviceSelects[0].value === '0' && serviceSelects[1].value === '0' && serviceSelects[2].value === '0') {
+      serviceSelects[0].setCustomValidity('Please select at least 1 service.');
+    } else {
+      serviceSelects[0].setCustomValidity('');
+    }
+
+    const [year, month, day] = dateInput.value.split('-').map(Number);
+    const dayOfWeek = (day + Math.floor((13 * (month + 1)) / 5) + year + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400)) % 7;
+    
+    if ([0, 1].includes(dayOfWeek)) {
+      dateInput.setCustomValidity('Please select a weekday.');
+    } else {
+      dateInput.setCustomValidity('');
+    }
+
+    dateInput.addEventListener('input', () => {
+      dateInput.setCustomValidity('');
+    });
+
+    const time = Number(timeInput.value.slice(0, 2)) + Number(timeInput.value.slice(3, 5)) / 60;
+
+    if (timeInput.value !== '' && timeInput.value !== null) {
+      if (dayOfWeek === 6 && (time < 8 || time > 13.5)) {
+        timeInput.setCustomValidity('Please select a time between 8:00 AM and 1:30 PM.');
+      } else if (time < 8 || time > 17) {
+        timeInput.setCustomValidity('Please select a time between 8:00 AM and 5 PM.');
+      } else {
+        timeInput.setCustomValidity('');
+      }
+    }
+
+    timeInput.addEventListener('input', () => {
+      timeInput.setCustomValidity('');
+    });
+  });
+}
+
 const makes = [
   'Abarth', 'Acura', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 'Bugatti', 'Cadillac', 'Chevrolet', 'Chrysler',
   'Citroën', 'Dacia', 'Daewoo', 'Daihatsu', 'Dodge', 'Donkervoort', 'DS', 'Ferrari', 'Fiat', 'Fisker',
@@ -79,3 +117,4 @@ initializeSelect('make', makes);
 initializeYearInput();
 initializeSelect('service', services);
 initializeModal();
+checkFormValidation();
